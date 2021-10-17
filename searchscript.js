@@ -1,7 +1,8 @@
+require("dotenv").config();
 const axios = require("axios");
 const TelegramBot = require("node-telegram-bot-api");
 
-const token = "2028870928:AAGEqg5eTyDCjFn8GuFKedHjFnzGIBo6XMw";
+const token = process.env.Token;
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
@@ -25,7 +26,7 @@ bot.on("message", (msg, match) => {
       .get(
         "https://yts.proxyninja.org/api/v2/list_movies.json?&query_term=" +
           url +
-          "&sort_by=title&quality=720p&order_by=asc&limit=10"
+          "&sort_by=title&quality=720p&limit=10"
       )
       .then(async (res) => {
         // let response = bodyParser.JSON(res);
